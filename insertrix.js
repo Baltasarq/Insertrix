@@ -521,7 +521,7 @@ const game = {
         window.requestAnimationFrame( () => game.showFrame() );
         document.onkeydown = (e) => {
             if ( e.isComposing
-              || e.keyCode === 229 )
+              || e.key === "Dead" )
             {
                 return;
             }
