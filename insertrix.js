@@ -343,6 +343,13 @@ class Board {
             this.#board.unshift( new Array( this.cols ).fill( 0 ) );
         }
     }
+
+    appendTrashRows(numRows)
+    {
+        for(let i = 0; i < numRows; ++i) {
+            this.#board.push( Array.from( { length: this.cols }, () => Math.floor( Math.random() * 2 ) ) );
+        }
+    }
     
     removeRows(listRows)
     {
@@ -571,9 +578,13 @@ const game = {
                             pScore.innerText = "" + game.score;
                         }
                         
+                        // Prepare the board
                         let filledRows = game.chkFilledRows();
+                        let numTrashRows = parseInt( filledRows.length / 2 );
+
                         game.board.removeRows( filledRows );
-                        game.board.insertEmptyRows( filledRows.length );
+                        game.board.insertEmptyRows( filledRows.length - numTrashRows );
+                        game.board.appendTrashRows( numTrashRows );
                     } else {
                         game.stopGame();
                     }
